@@ -1,10 +1,26 @@
 <form>
 
-  <div id="form-container">
-    <input id="query-text" type="textfield">
-    <input type="Button" name="submit" value="Submit!" ng-click="displayTweets()">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="form-container">
+          <input type="text" ng-model="query">
+          <button ng-click="search(query)" class="btn btn-danger" ng-show="!!query">Search</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <hr/>
+      <div class="progress" ng-show="isSearching">
+        <div class="progress-bar progress-bar-striped active" style="width: 100%">
+          <span>Loading...</span>
+        </div>
+      </div>
+      <div ng-repeat="tweet in tweets" ng-hide="isSearching">
+        <strong>{{tweet.name}}</strong>
+        <p>{{tweet.body}}</p>
+      </div>
+    </div>
   </div>
-
-  <div id="tweet-container"></div>
 
 </form>

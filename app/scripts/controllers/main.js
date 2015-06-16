@@ -1,5 +1,6 @@
 'use strict';
 
+<<<<<<< HEAD
 /**
  * @ngdoc function
  * @name tweenyApp.controller:MainCtrl
@@ -74,31 +75,31 @@ function getTweets(hashtags, callback) {
 
 }
 
+=======
+>>>>>>> 8e09941438bd2c804ede763c9fd0ba8b272d176f
 angular
 	.module('tweenyApp')
-	.controller('MainCtrl', function ($scope) {
-    
-		$scope.displayTweets = function() {
+	.controller('MainCtrl', function ($scope, $http) {
 
-			var hashtags = document
-							.getElementById('query-text')
-							.value
-							.split(/[#\s]/g)
-							.filter(String);
+    $scope.tweets = [];
+    $scope.query = '#kitten';
+    $scope.isSearching = false;
+    $scope.search = search;
 
-			var tweetContainer = document.getElementById('tweet-container');
+    function search(query) {
+      $scope.isSearching = true;
+      $http.get('http://127.0.0.1:8000/twitter/' + query).then(function (result) {
+        $scope.tweets = result.data.statuses.map(function (tweet) {
+          return {
+            user: tweet.user.name,
+            body: tweet.text,
+            link: '',
+            screen_name: tweet.user.screen_name
+          };
+        });
+      }).finally(function () {
+        $scope.isSearching = false;
+      });
+    }
 
-			getTweets(hashtags, function(data) {
-				
-				data.map(function(value) {
-			
-					tweetContainer.appendChild(value.serialize());
-
-				});
-			
-			});
-
-		};
-
-	});
- 
+  });
