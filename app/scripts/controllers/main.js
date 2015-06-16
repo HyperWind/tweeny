@@ -52,23 +52,25 @@ function getTweets(hashtags, callback) {
 
 	var tweets = [];
 
-	$.getJSON('http://127.0.0.1:8000/twitter/' + hashtags.join(','), function (data) {
-
-		typeof(data);
-
-		var jsons = typeof(data) === "String" ? JSON.parse(data).statuses : data.statuses;
-
+	var req = new XMLHttpRequest();
+	
+	req.open('GET', 'http://127.0.0.1:8000/twitter/' + hashtags.join(','), false);
+	req.send(null);
+	req.onreadystatechange = function () {}
+	
+		var jsons = JSON.parse(req.responseText).statuses;
+	
 		jsons.forEach(function(json) {
-
+	
 		var url = json.entities.urls[0] || {url: ''};
-
+	
 		tweets.push(new Tweet(json.user.name, json.user.screen_name, json.text,url.url));
 
-		});
-
 		callback(tweets);
-
-	});
+	
+		});
+	
+	};
 
 }
 
