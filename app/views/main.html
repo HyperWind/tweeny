@@ -5,18 +5,20 @@
         <h1>Tweeny</h1>
       </div>
       <div class="form-container">
-        <input class="query-input" type="text" ng-model="query">
-        <button ng-click="search(query)" class="query-button" ng-show="!!query">Search</button>
+        <input class="query-input" type="text" ng-model="query"><!--
+        --><button ng-click="search(query)" class="query-button" ng-show="!!query">Search</button>
       </div>
     </div>
 
     <div class="row">
-      <div class="progress" ng-show="isSearching">
-        <div class="progress-bar progress-bar-striped active" style="width: 100%">
-          <span>Loading...</span>
+      <div style="text-align: center;">
+        <div class="progress" ng-show="isSearching" style="width: 90%; display: inline-block;">
+          <div class="progress-bar progress-bar-striped active" style="width: 100%">
+            <span>Loading...</span>
+          </div>
         </div>
       </div>
-      <div ng-repeat="tweet in tweets" ng-hide="isSearching">
+      <div ng-repeat="tweet in tweets" ng-hide="isSearching" style="text-align: center;">
         <div class="tweet">
           <div class="tweet-name"> 
             <h3>{{tweet.user}}</h3>

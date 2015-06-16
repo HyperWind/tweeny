@@ -13,9 +13,8 @@ Running `grunt test` will run the unit tests with karma.
 
 ## TODO
 
-* Look & feel
+* Look & feel (kinda done)
 * Query validation
-* Make # optional
-
+* Make # optional (done)
 * Make some tests
 * Show dropdown with list size (5, 10, 20)
