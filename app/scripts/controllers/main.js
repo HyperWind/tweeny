@@ -21,7 +21,7 @@ angular
     function search(query) {
 
       if (!queryValid(query)) {
-        alert("Invalid query!");
+        window.alert('Invalid query!'');
         return;
       }
 
