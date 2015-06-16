@@ -20,9 +20,40 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   h1 {
 
     font-family: Arial;
-    font-size: 2.5em;
+    font-size: 4em;
     color: #191919;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
+
+  }
+
+}
+
+.form-container {
+
+  text-align: center;
+
+  .query-input {
+
+    width: 90%;
+    height: 40px;
+    border: 1px solid #191919;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: inline-block;
+
+  }
+
+  .query-button {
+
+    display: block;
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: #ff4d4d;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border-radius: 7px;
 
   }
 
@@ -30,7 +61,31 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 .tweet {
 
+  margin: 10px;
+  padding: 12px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
 
+  .tweet-name {
 
+    margin-bottom: 18px;
+
+    h3 {
+
+      display: inline;
+      margin-right: 20px;
+      font-weight: bold;
+
+    }
+
+    h5 {
+
+      font-weight: bold;
+      display: inline;
+      color: #595959;
+
+    }
+
+  }
 
 }
