@@ -1,26 +1,33 @@
 <form>
 
-  <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <div id="form-container">
-          <input type="text" ng-model="query">
-          <button ng-click="search(query)" class="btn btn-danger" ng-show="!!query">Search</button>
-        </div>
+      <div class="header">
+        <h1>Tweeny</h1>
+      </div>
+      <div id="form-container">
+        <input type="text" ng-model="query">
+        <button ng-click="search(query)" class="btn btn-danger" ng-show="!!query">Search</button>
       </div>
     </div>
+
     <div class="row">
-      <hr/>
       <div class="progress" ng-show="isSearching">
         <div class="progress-bar progress-bar-striped active" style="width: 100%">
           <span>Loading...</span>
         </div>
       </div>
       <div ng-repeat="tweet in tweets" ng-hide="isSearching">
-        <strong>{{tweet.name}}</strong>
-        <p>{{tweet.body}}</p>
+        <div class="tweet">
+          <div class="tweet-name"> 
+            <h3>{{tweet.user}}</h3>
+            <h5>{{tweet.screenName}}</h5>
+          </div>
+          <div class="tweet-body">
+            <p>{{tweet.body}}</p>
+            <a href="{{tweet.link}}">Source</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
 </form>
