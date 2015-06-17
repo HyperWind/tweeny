@@ -16,23 +16,36 @@ describe('Controller: MainCtrl', function () {
     expect(scope.tweets).toEqual([]);
   });
 
-  it('should have set the default query to #kitten', function () {
+  it('should have set the default query to #cats', function () {
     var scope = $rootScope.$new();
     $controller('MainCtrl', {$scope: scope});
-    expect(scope.query).toEqual('#kitten');
+    expect(scope.query).toEqual('#cats');
   });
 
   it('should populate the tweets property by the results returned from backend', function () {
     $httpBackend.whenGET(/twitter/).respond(200, {
       statuses: [
-        {user: {name: 'Peter Pane', screen_name: 'Peter'}, text: 'Hello Peter'}
+        {user: {name: 'Peter Pane', screen_name: 'Peter'}, text: 'Hello Peter', id_str: '1'}
       ]
     });
     var scope = $rootScope.$new();
     $controller('MainCtrl', {$scope: scope});
     scope.search('hello');
     $httpBackend.flush();
-    expect(scope.tweets).toEqual([{user: 'Peter Pane', body: 'Hello Peter', link: '', screen_name: 'Peter'}]);
+    expect(scope.tweets).toEqual([{user: 'Peter Pane', body: 'Hello Peter', link: 'https://twitter.com/Peter/status/1', screenName: '@Peter'}]);
+  });
+
+  it('searchForm should be defined', function () {
+    expect(scope.searchForm).toBeDefined();
+  });
+
+  it('should reject invalid hashtags', function () {
+    var scope = $rootScope.$new();
+    $controller('MainCtrl', {$scope: scope});
+    scope.query = '#test #%^';
+    expect(scope.searchForm.$valid).toBe(false);
+    scope.query = '#meow';
+    expect(scope.searchForm.$valid).toBe(true);
   });
 
 });
