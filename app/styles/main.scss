@@ -36,21 +36,29 @@ body {
 
 .invalid {
 
-  max-width: 30%;
+  display: table;
+  width: 450px;
+  height: 60px;
   background-color: #ff4d4d;
   text-align: center;
-  font-size: 2em;
-  font-weight: bold;
   border-radius: 7px;
-  padding: 7px;
   margin: 20px auto 20px auto;
+
+  p {
+
+    font-size: 2em;
+    font-weight: bold;
+    display: table-cell;
+    vertical-align: middle;
+
+  }
 
 }
 
 .form-container {
 
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 
   .query-input {
 
@@ -89,36 +97,65 @@ body {
 
 }
 
-.tweet {
+.none-found {
 
+  margin: 0 auto;
+  width: 450px;
+  height: 60px;
+  background-color: #ff4d4d;
+  border-radius: 7px;
   display: inline-block;
-  width: 90%;
-  margin: 10px;
-  padding: 12px;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  text-align: left;
+  text-align: center;
+  display: table;
 
-  .tweet-name {
+  p {
 
-    margin-bottom: 18px;
+    font-size: 2em;
+    font-weight: bold;
+    display: table-cell;
+    vertical-align: middle;
 
-    h3 {
+  }
 
-      display: inline;
-      margin-right: 20px;
-      font-weight: bold;
+}
 
+.tweet-container {
+
+  width: 960px;
+  margin: 0 auto;
+
+  .tweet {
+  
+    display: block;
+    width: 300px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    text-align: left;
+  
+    .tweet-name {
+  
+      margin-bottom: 18px;
+  
+      h3 {
+  
+        display: inline;
+        margin-right: 20px;
+        font-weight: bold;
+  
+      }
+  
+      h5 {
+  
+        font-weight: bold;
+        display: inline;
+        color: #595959;
+  
+      }
+  
     }
-
-    h5 {
-
-      font-weight: bold;
-      display: inline;
-      color: #595959;
-
-    }
-
+  
   }
 
 }

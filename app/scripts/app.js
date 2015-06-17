@@ -10,6 +10,7 @@
  */
 angular
   .module('tweenyApp', [
+    'wu.masonry',
     'ngRoute',
     'ngSanitize'
   ])
