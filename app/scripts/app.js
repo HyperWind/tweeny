@@ -24,6 +24,6 @@ angular
         redirectTo: '/'
       });
   })
-  .run(function (tweetService, cookieStorage) {
-    tweetService.setStorageProvider(cookieStorage);
+  .run(function (tweetService, localStorage) {
+    tweetService.setStorageProvider(localStorage);
   });
