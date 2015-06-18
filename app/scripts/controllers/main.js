@@ -33,7 +33,9 @@ function unique(arr) {
 
     for (var i = 0; i < arr.length; i++) {
 
-      if (val === arr[i] && i !== which) delete arr[i];
+      if (val === arr[i] && i !== which) {
+        delete arr[i];
+      }
 
     }
 
@@ -41,7 +43,7 @@ function unique(arr) {
 
   }).filter(function (val) {
 
-    return val != undefined;
+    return val !== undefined;
 
   });
 
