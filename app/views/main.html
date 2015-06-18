@@ -9,6 +9,14 @@
         --><button type="submit" ng-click="search(query); clicked = true" class="query-button">Search</button>
       </div>
 
+      <div>
+        <div ng-repeat="prev in getHistory(5)">
+          <div>
+            <a href="#" ng-click="query = prev">{{prev}}</a> 
+          </div>
+        </div>
+      </div>
+
       <div class="invalid" ng-show="badclick">
         <p>Invalid query!</p>
       </div>
