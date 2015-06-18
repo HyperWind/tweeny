@@ -51,8 +51,50 @@ function unique(arr) {
 }
 
 angular
+  .module('tweenyApp')
+  .service('localStorage', function () {
+    this.get = function (key) {};
+    this.remove = function (key) {};
+    this.set = function (key, value) {};
+  });
+
+angular
+  .module('tweenyApp')
+  .service('cookieStorage', function () {
+    this.get = function (key) {};
+    this.remove = function (key) {};
+    this.set = function (key, value) {};
+  });
+
+angular
+  .module('tweenyApp')
+  .service('tweetService', function (localStorage) {
+
+    var storage = localStorage;
+
+    this.setStorageProvider = function (provider) {
+      storage = provider;
+    };
+
+    this.getHistory = function () {
+      return storage.get('tweets') || [];
+    };
+
+    this.addToHistory = function (what) {
+      var tweets = storage.get('tweets') || [];
+      tweets.push(what);
+      storage.set('tweets', tweets);
+    };
+
+    this.clearHistory = function () {
+      storage.remove('tweets');
+    };
+
+  });
+
+angular
 	.module('tweenyApp')
-	.controller('MainCtrl', function ($scope, $http) {  
+	.controller('MainCtrl', function ($scope, $http) {
 
     function getHistory(iters, all) {
 
@@ -95,6 +137,8 @@ angular
             screenName: '@' + tweet.user.screen_name
           };
         });
+      }, function () {
+        console.log('Error from backend!');
       }).finally(function () {
         $scope.isSearching = false;
       });
