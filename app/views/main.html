@@ -6,16 +6,23 @@
       </div>
       <div class="form-container" ng-form="searchForm">
         <input class="query-input" type="text" ng-pattern="/^([\#a-z0-9\_]|\s){2,}$/i" ng-model="query" ng-required="true" ng-class="searchForm.$error.pattern[0].$invalid ? 'field-false' : ''"><!--
-        --><button type="submit" ng-click="search(query); clicked = true" class="query-button">Search</button>
+        --><button type="submit" ng-click="searchQuery(query); clicked = true" class="query-button">Search</button>
       </div>
 
-      <div>
-        <ul>
-          <li ng-repeat="prev in getHistory(10) track by $index">
-            <a ng-click="query = prev;search(query);">{{prev}}</a> 
-          </li>
-        </ul>
-      </div> <!-- find a better way of doing this -->
+      <div style="text-align: center">
+        <div class="history-container">
+          <div class="history" ng-class="historyClicked ? 'active' : ''">
+            <ul>
+              <li class="single-entry" ng-repeat="prev in getHistory(5) track by $index">
+                <a ng-click="search(prev);">{{prev}}</a> 
+              </li>
+            </ul>
+          </div>
+
+          <div class="history-button" ng-click="historyClicked = !historyClicked"></div>
+        </div>
+
+      </div>
 
       <div class="invalid" ng-show="badclick">
         <p>Invalid query!</p>

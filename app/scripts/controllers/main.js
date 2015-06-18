@@ -6,14 +6,6 @@ angular
 
     var ls = window.localStorage;
 
-    this.get = get;
-    this.remove = remove;
-    this.set = set;
-
-    function clear(key) {
-      ls.setItem(key, '');
-    }
-
     function get(key) {
       var item = ls.getItem(key);
       return item ? JSON.parse(item) : null;
@@ -27,6 +19,10 @@ angular
       ls.setItem(key, JSON.stringify(value));
     }
 
+    this.get = get;
+    this.remove = remove;
+    this.set = set;
+
   });
 
 angular
@@ -35,24 +31,29 @@ angular
 
     var storage = localStorage, KEY = 'tweetApp';
 
-    this.setStorageProvider = function (provider) {
+    function setStorageProvider(provider) {
       storage = provider;
-    };
+    }
 
-    this.getHistory = function (amount) {
+    function getHistory(amount) {
       var history = storage.get(KEY) || [];
-      return history.length < amount ? history : history.slice(0, amount - 1);
-    };
+      return history.length < amount ? history : history.slice(history.length - amount, history.length);
+    }
 
-    this.addToHistory = function (tweet) {
+    function addToHistory(tweet) {
       var existing = storage.get(KEY) || [];
       existing.push(tweet);
       storage.set(KEY, existing);
-    };
+    }
 
-    this.clearHistory = function () {
+    function clearHistory() {
       storage.remove(KEY);
-    };
+    }
+
+    this.setStorageProvider = setStorageProvider;
+    this.getHistory = getHistory;
+    this.addToHistory = addToHistory;
+    this.clearHistory = clearHistory;
 
   });
 
@@ -60,17 +61,19 @@ angular
 	.module('tweenyApp')
 	.controller('MainCtrl', function ($scope, $http, tweetService) {
 
-    function search(query) {
+    function searchQuery(query) {
 
       if($scope.searchForm.$invalid) {
-
         $scope.badclick = true;
         return;
-
       }
 
       tweetService.addToHistory(query);
       $scope.badclick = false;
+      search(query);      
+    }
+
+    function search(query) {
       $scope.isSearching = true;
       $http.get('http://127.0.0.1:8000/twitter/' + query.replace(/[#\s]/g, '')).then(function (result) {
         $scope.tweets = result.data.statuses.map(function (tweet) {
@@ -92,8 +95,10 @@ angular
     $scope.query = '#cats';
     $scope.isSearching = false;
     $scope.search = search;
+    $scope.searchQuery = searchQuery;
     $scope.searchForm = {};
     $scope.badclick = false;
     $scope.getHistory = tweetService.getHistory;
+    $scope.historyClicked = false;
 
   });

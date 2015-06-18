@@ -58,14 +58,13 @@ body {
 .form-container {
 
   text-align: center;
-  margin-bottom: 50px;
 
   .query-input {
 
     width: 80%;
     height: 40px;
     background-color: #ffffff;
-    border-radius: 7px 0px 0px 7px;
+    border-radius: 7px 0px 0px 0px;
     border: none;
     display: inline-block;
     padding: 0;
@@ -90,7 +89,7 @@ body {
     height: 40px;
     background-color: #ff4d4d;
     border: none;
-    border-radius: 0px 7px 7px 0px;
+    border-radius: 0px 7px 0px 0px;
     font-size: 1.4em;
 
   }
@@ -157,5 +156,74 @@ body {
     }
   
   }
+
+}
+
+.history-container {
+
+  width: 90%;
+  margin: 0 auto 50px auto;
+
+  .history {
+
+    background-color: #393939;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    transition: 
+      max-height 1s,
+      padding 0.1s;
+    max-height: 100em;
+
+    ul {
+
+      margin: 0;
+      padding: 0;
+      text-align: center;
+
+      li {
+
+        padding: 5px;
+        margin: 5px;
+        display: inline-block;
+        list-style-type: none;
+        font-size: 1.3em;
+        width: 80%;
+        background-color: #585858;
+        border-radius: 7px;
+
+        a:hover {
+
+          color: #757575 !important;
+          text-decoration: none;
+
+        }
+
+        a {
+
+          color: #848484 !important;
+
+        }
+
+      }
+
+    }
+
+  }
+
+  .history:not(.active) {
+    max-height: 0;
+    padding: 0;
+  }
+
+  .history-button {
+
+    width: 100%;
+    background-color: #191919;
+    border-radius: 0px 0px 7px 7px;
+    height: 15px;
+
+  }
+
 
 }
