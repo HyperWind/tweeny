@@ -23,4 +23,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function (tweetService, cookieStorage) {
+    tweetService.setStorageProvider(cookieStorage);
   });
