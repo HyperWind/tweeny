@@ -4,85 +4,54 @@ angular
   .module('tweenyApp')
   .service('localStorage', function () {
 
-    window.localStorage.setItem('tweenyApp', JSON.stringify({}));
-    this.length = 0;
+    var ls = window.localStorage;
 
-    this.get = function (key) {
+    this.get = get;
+    this.remove = remove;
+    this.set = set;
 
-      return JSON.parse(window.localStorage.getItem('tweenyApp'))[key];
+    function clear(key) {
+      ls.setItem(key, '');
+    }
 
-    };
-    this.remove = function (key) {
+    function get(key) {
+      var item = ls.getItem(key);
+      return item ? JSON.parse(item) : null;
+    }
 
-      var arr = JSON.parse(window.localStorage.getItem('tweenyApp'));
-      delete arr[key];
-      for (var i = key; i < this.length; i++) {
-        arr[i] = arr[i + 1];
-      }
-      window.localStorage.setItem('tweenyApp', JSON.stringify(arr));
-      this.length--;
+    function remove(key) {
+      ls.removeItem(key);
+    }
 
-    };
-    this.set = function (value) {
-
-      var arr = JSON.parse(window.localStorage.getItem('tweenyApp'))[this.length] = value;
-      window.localStorage.setItem('tweenyApp', JSON.stringify(arr));
-      this.length++;
-
-    };
-    this.clear = function () {
-
-      window.localStorage.setItem('tweenyApp', JSON.stringify({}));
-
-    };
+    function set(key, value) {
+      ls.setItem(key, JSON.stringify(value));
+    }
 
   });
-
-/*
-angular
-  .module('tweenyApp')
-  .service('cookieStorage', function () {
-    this.get = function (key) {};
-    this.remove = function (key) {};
-    this.set = function (key, value) {};
-  });
-*/
 
 angular
   .module('tweenyApp')
   .service('tweetService', function (localStorage) {
 
-    var storage = localStorage;
+    var storage = localStorage, KEY = 'tweetApp';
 
     this.setStorageProvider = function (provider) {
       storage = provider;
     };
 
     this.getHistory = function (amount) {
-      
-      var arr = [];
-
-      for (var i = 1; i <= amount; i++) {
-        arr.push(storage.get(storage.length() - i));
-      }
-
-      arr = arr.filter(function (value, index, self) {
-
-        return self.indexOf(value) === index;
-
-      });
-
-      console.log(arr);
-      return arr;
-
+      var history = storage.get(KEY) || [];
+      return history.length < amount ? history : history.slice(0, amount - 1);
     };
 
-    this.addToHistory = function (what) {
-      storage.set(what);
+    this.addToHistory = function (tweet) {
+      var existing = storage.get(KEY) || [];
+      existing.push(tweet);
+      storage.set(KEY, existing);
     };
 
     this.clearHistory = function () {
-      storage.clear();
+      storage.remove(KEY);
     };
 
   });

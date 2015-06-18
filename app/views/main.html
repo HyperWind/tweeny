@@ -10,11 +10,11 @@
       </div>
 
       <div>
-        <div ng-repeat="prev in getHistory(5)">
-          <div>
-            <a href="#" ng-click="query = prev">{{prev}}</a> 
-          </div>
-        </div>
+        <ul>
+          <li ng-repeat="prev in getHistory(10) track by $index">
+            <a ng-click="query = prev;search(query);">{{prev}}</a> 
+          </li>
+        </ul>
       </div> <!-- find a better way of doing this -->
 
       <div class="invalid" ng-show="badclick">
